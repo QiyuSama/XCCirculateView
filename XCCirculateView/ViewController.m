@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "XCCirculateView.h"
+#import "UIView+Extension.h"
 
 @interface ViewController ()
 
@@ -14,14 +16,17 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    NSArray *imageUrls = imageUrls = @[@"http://pic39.nipic.com/20140226/18071023_162553457000_2.jpg", @"http://pic36.nipic.com/20131217/6704106_233034463381_2.jpg", @"http://www.52ij.com/uploads/allimg/160317/0Q91622b-5.jpg"];
+    XCCirculateView *circulateView = [XCCirculateView circulateViewWithframe:CGRectMake(0, 0, kScreenWidth, 140) imageUrls:imageUrls];
+    circulateView.circulateViewItemDidClickBlock = ^(NSInteger index){
+        NSLog(@"点击了第%ld个", index);
+    };
+    [self.view addSubview:circulateView];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end
