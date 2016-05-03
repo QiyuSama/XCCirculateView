@@ -24,9 +24,9 @@
     circulateView.circulateViewItemDidClickBlock = ^(NSInteger index){
         NSLog(@"点击了第%ld个", index);
     };
+    circulateView.isAutoCirculate = YES;
     [self.view addSubview:circulateView];
 }
-
 
 
 @end

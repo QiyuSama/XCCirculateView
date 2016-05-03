@@ -17,10 +17,15 @@
 @property (assign, nonatomic) XCCirculateViewScrollDirection direction;
 @property (assign, nonatomic) NSInteger imageIndex;
 @property (assign, nonatomic) NSInteger nextIndex;
+@property (strong, nonatomic) NSTimer *timer;
 @end
 
 @implementation XCCirculateView
 
+- (void)nextPage
+{
+    [_scrollView setContentOffset:CGPointMake(self.width * 2, 0) animated:YES];
+}
 
 + (instancetype)circulateViewWithframe:(CGRect)frame imageUrls:(NSArray<NSString *> *)imageUrls
 {
@@ -30,15 +35,25 @@
     return circulateView;
 }
 
+#pragma mark setter
 - (void)setImageUrls:(NSArray<NSString *> *)imageUrls
 {
     _imageUrls = [imageUrls copy];
     [_disPlayImageView sd_setImageWithURL:[NSURL URLWithString:[imageUrls firstObject]]];
-    [_scrollView setContentOffset:CGPointMake(self.width, 0) animated:NO];
+    
     _pageControl.numberOfPages = _imageUrls.count;
-//    _pageControl.currentPage = 0;
 }
 
+- (void)setIsAutoCirculate:(BOOL)isAutoCirculate
+{
+    _isAutoCirculate = isAutoCirculate;
+    if (_isAutoCirculate) {
+        [self creatTimer];
+    }else
+    {
+        [self stopTimer];
+    }
+}
 
 - (void)setFrame:(CGRect)frame
 {
@@ -47,7 +62,7 @@
     _backupImageview.width = _disPlayImageView.width = self.width;
     _backupImageview.height = _disPlayImageView.height = self.height;
     _disPlayImageView.origin = CGPointMake(self.width, 0);
-    
+    [_scrollView setContentOffset:CGPointMake(self.width, 0) animated:NO];
 }
 
 - (void)awakeFromNib
@@ -64,8 +79,6 @@
     [_scrollView addSubview:_backupImageview];
     _scrollView.delegate = self;
     
-//    _pageControl = [UIPageControl new];
-//    [self addSubview:_pageControl];
 }
 
 - (void)imageDidClicked
@@ -73,8 +86,8 @@
     if (_circulateViewItemDidClickBlock) {
         _circulateViewItemDidClickBlock(_imageIndex);
     }
-    NSLog(@"%ld", _imageIndex);
 }
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
@@ -86,7 +99,6 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"direction"]) {
-        if(change[NSKeyValueChangeNewKey] == change[NSKeyValueChangeOldKey]) return;
         XCCirculateViewScrollDirection direction = [change[NSKeyValueChangeNewKey] integerValue];
         if (direction == XCCirculateViewScrollDirectionLeft) {
             _backupImageview.origin = CGPointMake(2 * self.width, 0);
@@ -98,21 +110,53 @@
                 _nextIndex = _imageUrls.count - 1;
             }
         }
+
         [_backupImageview sd_setImageWithURL:[NSURL URLWithString:_imageUrls[_nextIndex]]];
     }
 }
-
 
 - (void)dealloc
 {
     [self removeObserver:self forKeyPath:@"direction"];
 }
-#pragma scrollViewDelegate
+
+- (void)scrollFinished
+{
+    _direction = XCCirculateViewScrollDirectionNone;
+    if (!_isAutoCirculate) {
+        if (_scrollView.contentOffset.x == self.width) {//没有移动
+            return;
+        }
+    }
+    _imageIndex = _nextIndex;
+    _pageControl.currentPage = _imageIndex;
+    _disPlayImageView.image = _backupImageview.image;
+    
+    [_scrollView setContentOffset:CGPointMake(self.width, 0) animated:NO];
+}
+
+- (NSTimer *)creatTimer
+{
+    if (_timer) {
+        [self stopTimer];
+    }
+    _timer = [NSTimer timerWithTimeInterval:3.0 target:self selector:@selector(nextPage) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    return _timer;
+}
+
+- (void)stopTimer
+{
+    [_timer invalidate];
+    _timer = nil;
+}
+
+#pragma mark scrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (_scrollView.contentOffset.x > _disPlayImageView.x) {
+    if (_scrollView.contentOffset.x > _disPlayImageView.x) {//判断滑动的方向
         
-        if (_direction != XCCirculateViewScrollDirectionLeft) {
+        if (_direction != XCCirculateViewScrollDirectionLeft) {//防止重复，因为scrollViewDidScroll会在一次滑动中调用多次
             [self setValue:@(XCCirculateViewScrollDirectionLeft) forKey:@"direction"];
         }
     }else if(_scrollView.contentOffset.x < _disPlayImageView.x){
@@ -125,18 +169,25 @@
     
 }
 
-
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    _direction = XCCirculateViewScrollDirectionNone;
-    if (_scrollView.contentOffset.x == self.width) {//没有移动
-        return;
+    [self scrollFinished];
+    if (_isAutoCirculate) {
+        [self creatTimer];
     }
-    _imageIndex = _nextIndex;
-    _disPlayImageView.image = _backupImageview.image;
-    [_scrollView setContentOffset:CGPointMake(self.width, 0) animated:NO];
-    _pageControl.currentPage = _imageIndex;
 }
 
 
+#pragma mark 无限滚动
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (_isAutoCirculate) {
+        [self stopTimer];
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    [self scrollFinished];
+}
 @end
