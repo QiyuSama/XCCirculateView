@@ -32,11 +32,11 @@
 		3BF8DF7C1CD20B2600E76151 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BF8DF7F1CD20B2600E76151 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BF8DF811CD20B2600E76151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3BF8DF871CD20B4E00E76151 /* XCCirculateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCirculateView.h; sourceTree = "<group>"; };
-		3BF8DF881CD20B4E00E76151 /* XCCirculateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCirculateView.m; sourceTree = "<group>"; };
-		3BF8DF8A1CD20B6000E76151 /* XCCirculateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XCCirculateView.xib; sourceTree = "<group>"; };
-		3BF8DF8C1CD20E5D00E76151 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
-		3BF8DF8D1CD20E5D00E76151 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		3BF8DF871CD20B4E00E76151 /* XCCirculateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XCCirculateView.h; path = XCCirculateView/XCCirculateView.h; sourceTree = "<group>"; };
+		3BF8DF881CD20B4E00E76151 /* XCCirculateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XCCirculateView.m; path = XCCirculateView/XCCirculateView.m; sourceTree = "<group>"; };
+		3BF8DF8A1CD20B6000E76151 /* XCCirculateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XCCirculateView.xib; path = XCCirculateView/XCCirculateView.xib; sourceTree = "<group>"; };
+		3BF8DF8C1CD20E5D00E76151 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Extension.h"; path = "XCCirculateView/UIView+Extension.h"; sourceTree = "<group>"; };
+		3BF8DF8D1CD20E5D00E76151 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Extension.m"; path = "XCCirculateView/UIView+Extension.m"; sourceTree = "<group>"; };
 		C191DCCF1CC81F4147500EF9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -60,9 +60,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3BF0FEC01CE45B6A00EA74B6 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				3BF8DF871CD20B4E00E76151 /* XCCirculateView.h */,
+				3BF8DF881CD20B4E00E76151 /* XCCirculateView.m */,
+				3BF8DF8A1CD20B6000E76151 /* XCCirculateView.xib */,
+				3BF8DF8C1CD20E5D00E76151 /* UIView+Extension.h */,
+				3BF8DF8D1CD20E5D00E76151 /* UIView+Extension.m */,
+			);
+			name = Class;
+			sourceTree = "<group>";
+		};
 		3BF8DF641CD20B2500E76151 = {
 			isa = PBXGroup;
 			children = (
+				3BF0FEC01CE45B6A00EA74B6 /* Class */,
 				3BF8DF6F1CD20B2600E76151 /* XCCirculateView */,
 				3BF8DF6E1CD20B2500E76151 /* Products */,
 				674C94B3C2336FAE16D5D8F5 /* Pods */,
@@ -90,11 +103,6 @@
 				3BF8DF7E1CD20B2600E76151 /* LaunchScreen.storyboard */,
 				3BF8DF811CD20B2600E76151 /* Info.plist */,
 				3BF8DF701CD20B2600E76151 /* Supporting Files */,
-				3BF8DF871CD20B4E00E76151 /* XCCirculateView.h */,
-				3BF8DF881CD20B4E00E76151 /* XCCirculateView.m */,
-				3BF8DF8A1CD20B6000E76151 /* XCCirculateView.xib */,
-				3BF8DF8C1CD20E5D00E76151 /* UIView+Extension.h */,
-				3BF8DF8D1CD20E5D00E76151 /* UIView+Extension.m */,
 			);
 			path = XCCirculateView;
 			sourceTree = "<group>";

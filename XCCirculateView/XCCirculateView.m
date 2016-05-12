@@ -123,11 +123,11 @@
 - (void)scrollFinished
 {
     _direction = XCCirculateViewScrollDirectionNone;
-    if (!_isAutoCirculate) {
-        if (_scrollView.contentOffset.x == self.width) {//没有移动
-            return;
-        }
+    
+    if (_scrollView.contentOffset.x == self.width) {//没有移动
+        return;
     }
+   
     _imageIndex = _nextIndex;
     _pageControl.currentPage = _imageIndex;
     _disPlayImageView.image = _backupImageview.image;

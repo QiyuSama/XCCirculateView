@@ -28,5 +28,4 @@
     [self.view addSubview:circulateView];
 }
 
-
 @end
