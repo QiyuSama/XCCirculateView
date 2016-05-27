@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B0CF3311CF7F6C8003DACCC /* XCBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B0CF3301CF7F6C8003DACCC /* XCBaseRequest.m */; };
 		3BF8DF721CD20B2600E76151 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8DF711CD20B2600E76151 /* main.m */; };
 		3BF8DF751CD20B2600E76151 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8DF741CD20B2600E76151 /* AppDelegate.m */; };
 		3BF8DF781CD20B2600E76151 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8DF771CD20B2600E76151 /* ViewController.m */; };
@@ -22,6 +23,8 @@
 /* Begin PBXFileReference section */
 		01074A0E01BF68EC248C41B3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2FF2CDEECDDB630F130DD39D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		3B0CF32F1CF7F6C8003DACCC /* XCBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCBaseRequest.h; sourceTree = "<group>"; };
+		3B0CF3301CF7F6C8003DACCC /* XCBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCBaseRequest.m; sourceTree = "<group>"; };
 		3BF8DF6D1CD20B2500E76151 /* XCCirculateView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XCCirculateView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BF8DF711CD20B2600E76151 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3BF8DF731CD20B2600E76151 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -63,6 +66,8 @@
 		3BF0FEC01CE45B6A00EA74B6 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				3B0CF32F1CF7F6C8003DACCC /* XCBaseRequest.h */,
+				3B0CF3301CF7F6C8003DACCC /* XCBaseRequest.m */,
 				3BF8DF871CD20B4E00E76151 /* XCCirculateView.h */,
 				3BF8DF881CD20B4E00E76151 /* XCCirculateView.m */,
 				3BF8DF8A1CD20B6000E76151 /* XCCirculateView.xib */,
@@ -250,6 +255,7 @@
 				3BF8DF8E1CD20E5D00E76151 /* UIView+Extension.m in Sources */,
 				3BF8DF781CD20B2600E76151 /* ViewController.m in Sources */,
 				3BF8DF751CD20B2600E76151 /* AppDelegate.m in Sources */,
+				3B0CF3311CF7F6C8003DACCC /* XCBaseRequest.m in Sources */,
 				3BF8DF891CD20B4E00E76151 /* XCCirculateView.m in Sources */,
 				3BF8DF721CD20B2600E76151 /* main.m in Sources */,
 			);
