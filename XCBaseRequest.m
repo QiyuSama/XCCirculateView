@@ -57,7 +57,7 @@
 
 - (NSString *)getHost
 {
-    return @"http://api.caipiao.163.com";
+    return @"";
 }
 
 - (NSString *)getQuery
@@ -117,6 +117,8 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         id model = [modelClass mj_objectWithKeyValues:responseObject];
+    
+      
         _resultModel = model;
         //TODO 解析totalCount
         if(succes)

@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MLeaksFinder.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,7 +32,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>44D10418C8DAD2BA4AF56B1BA4F5477F</key>
+		<key>2D17D22D4FCD8B1AA39C05B92DC0C7E5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -42,7 +47,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F214BD2BC471B3CB60DCA6C858D5A2A0</key>
+		<key>D4C3ED4629E9EDBD4BBB92DE6CDBDC2E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D541F29EF2FB3F8B42590B0F8F4802E7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

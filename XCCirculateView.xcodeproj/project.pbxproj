@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3B0CF3311CF7F6C8003DACCC /* XCBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B0CF3301CF7F6C8003DACCC /* XCBaseRequest.m */; };
+		3B0CF3341CF851D7003DACCC /* TestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B0CF3331CF851D7003DACCC /* TestRequest.m */; };
+		3B0E66CA1D054DCF0015B481 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E66C91D054DCF0015B481 /* TestViewController.m */; };
 		3BF8DF721CD20B2600E76151 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8DF711CD20B2600E76151 /* main.m */; };
 		3BF8DF751CD20B2600E76151 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8DF741CD20B2600E76151 /* AppDelegate.m */; };
 		3BF8DF781CD20B2600E76151 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF8DF771CD20B2600E76151 /* ViewController.m */; };
@@ -25,6 +27,10 @@
 		2FF2CDEECDDB630F130DD39D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3B0CF32F1CF7F6C8003DACCC /* XCBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCBaseRequest.h; sourceTree = "<group>"; };
 		3B0CF3301CF7F6C8003DACCC /* XCBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCBaseRequest.m; sourceTree = "<group>"; };
+		3B0CF3321CF851D7003DACCC /* TestRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestRequest.h; sourceTree = "<group>"; };
+		3B0CF3331CF851D7003DACCC /* TestRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRequest.m; sourceTree = "<group>"; };
+		3B0E66C81D054DCF0015B481 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		3B0E66C91D054DCF0015B481 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		3BF8DF6D1CD20B2500E76151 /* XCCirculateView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XCCirculateView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BF8DF711CD20B2600E76151 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3BF8DF731CD20B2600E76151 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -108,6 +114,10 @@
 				3BF8DF7E1CD20B2600E76151 /* LaunchScreen.storyboard */,
 				3BF8DF811CD20B2600E76151 /* Info.plist */,
 				3BF8DF701CD20B2600E76151 /* Supporting Files */,
+				3B0CF3321CF851D7003DACCC /* TestRequest.h */,
+				3B0CF3331CF851D7003DACCC /* TestRequest.m */,
+				3B0E66C81D054DCF0015B481 /* TestViewController.h */,
+				3B0E66C91D054DCF0015B481 /* TestViewController.m */,
 			);
 			path = XCCirculateView;
 			sourceTree = "<group>";
@@ -257,6 +267,8 @@
 				3BF8DF751CD20B2600E76151 /* AppDelegate.m in Sources */,
 				3B0CF3311CF7F6C8003DACCC /* XCBaseRequest.m in Sources */,
 				3BF8DF891CD20B4E00E76151 /* XCCirculateView.m in Sources */,
+				3B0CF3341CF851D7003DACCC /* TestRequest.m in Sources */,
+				3B0E66CA1D054DCF0015B481 /* TestViewController.m in Sources */,
 				3BF8DF721CD20B2600E76151 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

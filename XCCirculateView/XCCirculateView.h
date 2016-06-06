@@ -35,6 +35,9 @@ typedef void (^CirculateViewItemDidClickBlock)(NSInteger clickedIndex);
 
 /**
  *是否开启自动轮播，默认不开起
+ *@note 在父控件被释放的时候需要手动设置为NO，防止NSTimer造成的内存泄露
  */
 @property (assign, nonatomic) BOOL isAutoCirculate;
+
+
 @end
