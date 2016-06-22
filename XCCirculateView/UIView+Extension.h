@@ -15,4 +15,6 @@
 @property (assign, nonatomic) CGFloat x;
 @property (assign, nonatomic) CGFloat y;
 @property (assign, nonatomic) CGPoint origin;
+
+- (void)bubbleView;
 @end

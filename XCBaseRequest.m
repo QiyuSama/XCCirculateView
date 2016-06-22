@@ -25,6 +25,7 @@
     if (_manager == nil) {
         NSString *hostStr = [self getHost];
         _manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:hostStr]];
+        _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     }
     return _manager;
 }
@@ -33,7 +34,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelRequest) name:[NSString stringWithFormat:@"%@_CancelRequest",NSStringFromClass([self class])] object:nil];
     }
     return self;

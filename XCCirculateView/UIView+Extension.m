@@ -8,6 +8,8 @@
 
 #import "UIView+Extension.h"
 
+static const CGFloat Arror_height = 10;
+static const CGFloat CornoreRadius = 10;
 @implementation UIView (Extension)
 
 - (CGFloat)width
@@ -69,4 +71,66 @@
     frame.origin = origin;
     self.frame = frame;
 }
+
+- (UIBezierPath *)getDrawPath
+
+{
+    
+    CGRect rrect = self.bounds;
+    
+    
+    
+    CGFloat minx = CGRectGetMinX(rrect),
+    
+    midx = CGRectGetMidX(rrect),
+    
+    maxx = CGRectGetMaxX(rrect);
+    
+    CGFloat miny = CGRectGetMinY(rrect),
+    
+    
+    
+    maxy = CGRectGetMaxY(rrect)-Arror_height;
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    
+    [path moveToPoint:CGPointMake(midx+Arror_height, maxy)];
+    
+    [path addLineToPoint:CGPointMake(midx, maxy+Arror_height)];
+    
+    
+    [path addLineToPoint:CGPointMake(midx-Arror_height, maxy)];
+    
+    
+    [path addLineToPoint:CGPointMake(minx + CornoreRadius, maxy)];
+    
+    [path addQuadCurveToPoint:CGPointMake(minx, maxy - CornoreRadius) controlPoint:CGPointMake(minx, maxy)];
+    
+    [path addLineToPoint:CGPointMake(minx, miny + CornoreRadius)];
+    
+    [path addQuadCurveToPoint:CGPointMake(minx + CornoreRadius, miny) controlPoint:CGPointMake(minx, miny)];
+    
+    [path addLineToPoint:CGPointMake(maxx - CornoreRadius, miny)];
+    
+    [path addQuadCurveToPoint:CGPointMake(maxx, miny + CornoreRadius) controlPoint:CGPointMake(maxx, miny)];
+    
+    [path addLineToPoint:CGPointMake(maxx, maxy - CornoreRadius)];
+    
+    [path addQuadCurveToPoint:CGPointMake(maxx - CornoreRadius, maxy) controlPoint:CGPointMake(maxx, maxy)];
+    
+    [path closePath];
+    
+    return path;
+}
+
+- (void)bubbleView
+{
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.frame = self.bounds;
+    layer.path = [self getDrawPath].CGPath;
+    
+    self.layer.mask = layer;
+    
+}
+
 @end

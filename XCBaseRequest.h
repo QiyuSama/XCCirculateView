@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+NS_ASSUME_NONNULL_BEGIN
 @class AFHTTPSessionManager, XCBaseRequest;
 
 typedef NS_ENUM(NSInteger, BaseRequestType){
@@ -20,7 +21,7 @@ typedef void (^RequestFailureBlock)(NSError *error);
 
 
 /**
- *需要根据服务器的字段手动解析
+ * 需要根据服务器的字段手动解析
  */
 @property (nonatomic, assign, readonly) NSInteger totalCount;
 @property (nonatomic, strong, readonly) id resultModel;
@@ -51,5 +52,5 @@ typedef void (^RequestFailureBlock)(NSError *error);
  * 获取请求方法，默认为GET
  */
 - (BaseRequestType)getMethod;
-
+NS_ASSUME_NONNULL_END
 @end
