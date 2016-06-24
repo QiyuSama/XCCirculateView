@@ -12,37 +12,25 @@
 
 
 @interface XCBaseRequest ()
-@property (nonatomic, strong) AFHTTPSessionManager *manager;
+@property (strong, nonatomic) NSURLSessionTask *task;
 @end
 
+static AFHTTPSessionManager *_manager = nil;
 
 @implementation XCBaseRequest
-
-
-#pragma mark -
-- (AFHTTPSessionManager *)manager
-{
-    if (_manager == nil) {
-        NSString *hostStr = [self getHost];
-        _manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:hostStr]];
-        _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    }
-    return _manager;
-}
 
 #pragma mark -
 - (instancetype)init
 {
     if (self = [super init]) {
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelRequest) name:[NSString stringWithFormat:@"%@_CancelRequest",NSStringFromClass([self class])] object:nil];
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            NSString *hostStr = [self getHost];
+            _manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:hostStr]];
+            _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        });
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark -
@@ -56,6 +44,9 @@
     return @{};
 }
 
+/**
+ * 获取服务器地址
+ */
 - (NSString *)getHost
 {
     return @"";
@@ -71,24 +62,27 @@
 {
     
     XCBaseRequest *request = [self new];
+    [request cancelRequest];
+    
     BaseRequestType methodType = [request getMethod];
     if (methodType == BaseRequestTypePost)
     {
-        [request requestByPost:param success:succes failue:failure modelClass:modelClass];
+        request.task = [request requestByPost:param success:succes failue:failure modelClass:modelClass];
     }
     else
     {//默认GET
-        [request requestByGet:param success:succes failue:failure modelClass:modelClass];
+        request.task = [request requestByGet:param success:succes failue:failure modelClass:modelClass];
     }
+    
 }
 
-- (void)requestByGet:(NSDictionary *)param success:(RequestSuccessBlock)succes failue:(RequestFailureBlock)failure modelClass:(Class)modelClass
+- (NSURLSessionTask *)requestByGet:(NSDictionary *)param success:(RequestSuccessBlock)succes failue:(RequestFailureBlock)failure modelClass:(Class)modelClass
 {
     NSString *query = [self getQuery];
     NSMutableDictionary *defaultParam = [NSMutableDictionary dictionaryWithDictionary:[self getDefaultParam]];
     [defaultParam addEntriesFromDictionary:param];
     
-    [self.manager GET:query parameters:defaultParam progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSURLSessionTask *task = [_manager GET:query parameters:defaultParam progress:^(NSProgress * _Nonnull downloadProgress) {
         NSLog(@"%@", downloadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         id model = [modelClass mj_objectWithKeyValues:responseObject];
@@ -105,21 +99,21 @@
         }
     }];
 
+    return task;
 }
 
-- (void)requestByPost:(NSDictionary *)param success:(RequestSuccessBlock)succes failue:(RequestFailureBlock)failure modelClass:(Class)modelClass
+- (NSURLSessionTask *)requestByPost:(NSDictionary *)param success:(RequestSuccessBlock)succes failue:(RequestFailureBlock)failure modelClass:(Class)modelClass
 {
     NSString *query = [self getQuery];
     NSMutableDictionary *defaultParam = [NSMutableDictionary dictionaryWithDictionary:[self getDefaultParam]];
     [defaultParam addEntriesFromDictionary:param];
     
-    [self.manager POST:query parameters:defaultParam progress:^(NSProgress * _Nonnull uploadProgress) {
+    NSURLSessionTask *task = [_manager POST:query parameters:defaultParam progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         id model = [modelClass mj_objectWithKeyValues:responseObject];
-    
-      
+
         _resultModel = model;
         //TODO 解析totalCount
         if(succes)
@@ -129,18 +123,16 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
-
+    
+    return task;
 }
 
 #pragma mark -
 - (void)cancelRequest
 {
-    [self.manager invalidateSessionCancelingTasks:YES];
-    _manager = nil;
+    [self.task cancel];
+    self.task = nil;
 }
 
-+ (void)cancelRequest
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"%@_CancelRequest",NSStringFromClass(self)] object:nil];
-}
+
 @end

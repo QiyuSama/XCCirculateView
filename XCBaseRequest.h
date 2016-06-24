@@ -27,16 +27,13 @@ typedef void (^RequestFailureBlock)(NSError *error);
 @property (nonatomic, strong, readonly) id resultModel;
 
 /**
- * 发送请求
+ * 建立一个dataTask任务
  */
-+ (void)requestData:(NSDictionary *)param modelClass:(_Nonnull Class)modelClass Success:(RequestSuccessBlock) succes failue:(RequestFailureBlock) failure;
++ (void)requestData:(NSDictionary *)param modelClass:(Class)modelClass Success:(RequestSuccessBlock) succes failue:(RequestFailureBlock) failure;
 
-+ (void)cancelRequest;
 
-/**
- * 获取服务器地址
- */
-- (NSString *)getHost;
+
+/***************************************子类overwride*********************************************/
 
 /**
  * 获取相对地址
